@@ -1,0 +1,17 @@
+{
+  "name": "gda",
+  "version": "0.0.1",
+  "description": "git diff, git add",
+  "bin": "cli.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dima Paloskin",
+  "license": "MIT",
+  "dependencies": {
+    "execa": "^0.6.3",
+    "inquirer": "^3.0.6",
+    "inquirer-autocomplete-prompt": "^0.8.0",
+    "simple-git": "^1.70.0"
+  }
+}
