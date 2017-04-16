@@ -13,11 +13,23 @@ git.status(async (err, status) => {
 
   try {
     const { file } = await inquirer.prompt({
-      type: 'list',
+      type: 'autocomplete',
       name: 'file',
       message: 'Select file',
-      choices: status.modified.concat(status.not_added) // TODO: normilizer
+      source: async (answersSoFar, input) => {
+        if (!input) {
+          input = '';
+        }
+
+        const files = status.modified.concat(status.not_added);
+        const filtered = files.filter(file => {
+          return file.includes(input);
+        });
+
+        return filtered;
+      }
     });
+
 
     await execa.shell(`git diff ${file}`, { stdio: 'inherit' });
     const { needAdd } = await inquirer.prompt({
