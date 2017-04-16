@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const git = require('simple-git')(process.cwd());
 const inquirer = require('inquirer');
 const autocomplete = require('inquirer-autocomplete-prompt');
@@ -9,6 +11,13 @@ git.status(async (err, status) => {
   if (err) {
     console.error(err);
     process.exit(1);
+  }
+
+  const files = status.modified.concat(status.not_added);
+
+  if (!files.length) {
+    console.log('No files');
+    process.exit(0);
   }
 
   try {
